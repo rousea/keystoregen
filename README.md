@@ -26,8 +26,5 @@ named arguments:
                          Keystore format (default: BKS)
 ```
 
-#### TODO
-Add file globbing/wildcards
-
 #### License
 MIT
