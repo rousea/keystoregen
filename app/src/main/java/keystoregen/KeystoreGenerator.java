@@ -54,7 +54,7 @@ public class KeystoreGenerator {
         try (InputStream stream = new FileInputStream(file)) {
             keyStore.setCertificateEntry(file.getName(), CertificateFactory.getInstance("X.509").generateCertificate(stream));
         } catch (KeyStoreException | CertificateException | IOException e) {
-            logger.atInfo().withCause(e).log("unable to add cert %s", file.getName());
+            logger.atInfo().log("unable to add cert %s", file.getName());
         }
     }
 
