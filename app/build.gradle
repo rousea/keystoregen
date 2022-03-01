@@ -7,6 +7,7 @@
  */
 
 plugins {
+    id 'org.jetbrains.kotlin.jvm' version '1.5.31'
     // Apply the application plugin to add support for building a CLI application in Java.
     id 'application'
 }
@@ -17,32 +18,27 @@ repositories {
 }
 
 dependencies {
-    // Use JUnit test framework.
-    testImplementation 'junit:junit:4.13'
-
     // This dependency is used by the application.
     implementation 'org.bouncycastle:bcprov-jdk16:1.46'
     implementation 'net.sourceforge.argparse4j:argparse4j:0.8.1'
-    implementation 'com.google.flogger:flogger:0.5.1'
-    implementation 'com.google.flogger:flogger-system-backend:0.5.1'
 }
 
 application {
     // Define the main class for the application.
-    mainClass = 'keystoregen.KeystoreGenerator'
+    mainClass = 'keystoregen.KeystoreGeneratorKt'
 }
 
 task fatJar(type: Jar) {
-  manifest {
-    attributes( 'Main-Class': 'keystoregen.KeystoreGenerator')
-  }
-  archiveBaseName= "keystoregen"
-  from {
-    configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
-    configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
-  }
-  exclude 'META-INF/*.RSA', 'META-INF/*.SF', 'META-INF/*.DSA'
-  with jar
+    manifest {
+        attributes( 'Main-Class': 'keystoregen.KeystoreGeneratorKt')
+    }
+    archiveBaseName= "keystoregen"
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+    exclude 'META-INF/*.RSA', 'META-INF/*.SF', 'META-INF/*.DSA'
+    with jar
 }
 
 assemble.finalizedBy(fatJar)
